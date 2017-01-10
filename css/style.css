@@ -1,0 +1,93 @@
+<style>
+
+h6{}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.login_input {
+	width:150;
+	height:15vh;
+	margin:45vh 45vh 45vw 45vw;
+}
+
+.not_member {
+	text-align: center;
+}
+
+.middle_button {
+	display: inline-block;
+}
+
+.head {
+    background-color: lightgray;
+    height: 10vh;
+}
+.button-menu{
+    display:inline-table;
+    position: relative;
+	margin: 0px;
+    top : -45%;
+	padding: 0px;
+	background-color: lightgray;
+	height: 100%;
+	font-family: 'Pacifico', cursive;
+	font-size: 20px;
+	width: 15%;
+    border: solid black;
+}
+.deco-button {
+    display: inline-table;
+    position: relative;
+    margin-right: 10px;
+    top : -15px;
+    width : 7%;
+}
+.footer {
+    position: fixed;
+    bottom: 0px;
+    height: 5vh;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.footer_text{
+	font-family:monospace;
+	font-size:14pt;
+	text-align:right;
+	font-style:italic;
+	color: black;
+}
+
+.cam-button {
+	align: center;
+	padding: 10px 40px;
+  	margin: 10px 10px 10px 0px;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+	color: #FFFFFF;
+	text-decoration: none;
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.cam-button:active
+{
+	transform: translate(0px,5px);
+    -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
+
+</style>
