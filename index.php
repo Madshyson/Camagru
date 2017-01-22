@@ -1,26 +1,30 @@
-<?php session_start();?>
+<?php
+    require_once('./func/connectDb.php');
+?>
 <html>
 	<head>
 		<title>Camagru</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css">
 	</head>
-	<body background="Ressources/Background.png">
-		<?php
-    		if(!$_SESSION)
-        		$_SESSION['login'] = '';
-   		?>
+	<body background="Ressources/bgGrey.png">
 		<div class="login_input">
-			<form action="login.php" method="post">
-			<label for="login">E-Mail  </label></br>
+			<form action="func/DBlogin.php" method="post">
+			<label for="login">Login : </label></br>
 			<input id="login" type="text" name="login" size="28"/></br></br>
-			<label for="password">Password  </label></br>
+			<label for="password">Password : </label></br>
 			<input id="password" type="password" name="password" size="28"/></br></br>
 			<input class="middle_button" ;" type="submit" name="submit" value="OK" class="button">
 			</form>
-			<p class="not_member">Not a Member ?</br><a href="signup.php">Sign up !</p>
+			<p class="not_member">Not a Member ?</br>
+			<form action="signup.php">
+   				 <input type="submit" value="Sign up !" />
+			</form>
+			<?php
+				if ($_SESSION['sessionMsg']) {
+					echo "<span class='errorMsg'>" . $_SESSION['sessionMsg'] . "</span><br><br>";
+				}
+			?>
 		</div>
-		<div class="footer">
-                <P class="footer_text">&copy; mlavanan 2016&nbsp;&nbsp;&nbsp;<P/>
-        </div>
+		<?php include("footer.html") ?>
 	</body>
 </html>

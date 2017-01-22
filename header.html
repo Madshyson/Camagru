@@ -1,14 +1,21 @@
+<?php
+    require_once('./func/connectDb.php');
+?>
 <html>
-	<head>
-		<link rel="stylesheet" href="./css/style.css" type="text/css">
+    <head>
+        <link rel="stylesheet" href="./css/style.css" type="text/css">
     </head>
     <body>
-        <div class="head";>
-            <img src="Ressources/title.png" onclick="document.location.href='camagru.php'" height="100%">
-            <input type="button" value="Gallery" class="button-menu" onclick="document.location.href='gallery.php'">
-            <input type="button" value="My Pics" class="button-menu" onclick="document.location.href='mpics.php'">
-            <input type="button" value="My Profile" class="button-menu" onclick="document.location.href='mprofile.php'">
-            <input type="button" value="Deconexion" class="deco-button" onclick="document.location.href='index.php'">
+        <div class="head">
+            <table height="100%" style="margin: 0px; padding: 0px;">
+                <tr>
+                    <td><img src="Ressources/title.png" onclick="document.location.href='camagru.php'" height="25%"></td>
+                    <td><input type="button" value="Gallery" class="button-menu" onclick="document.location.href='gallery.php'"></td>
+                    <td><input type="button" value="My Pics" class="button-menu" onclick="document.location.href='mpics.php'"></td>
+                    <td><input type="button" value="My Profile" class="button-menu" onclick="document.location.href='mprofile.php'"></td>
+                    <td><?php echo $_SESSION['login']; ?> <br/><a href="./func/deco.php">Disconnect</a></td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>
