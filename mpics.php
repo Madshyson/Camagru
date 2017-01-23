@@ -15,8 +15,11 @@ if ($_SESSION['login'] == "")
         </head>
         <body background="Ressources/bgGrey.png">
             <?php include("header.html") ?>
+            ICI PAS D'INTERACTION A PART LA SUPPRESSION
             <table class="photo_table">
-            <p> HELLO CECI EST TES PHOTOS</p>
+                <div class="gall">
+                 <?php include('./func/DBgallery.php') ?>
+            </div>
             </table>
             <?php include("footer.html") ?>
     </body>

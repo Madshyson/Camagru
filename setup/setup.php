@@ -9,6 +9,7 @@ try {
     $sql .= "DROP TABLE IF EXISTS `user`;";
     $sql .= "DROP TABLE IF EXISTS `likes`;";
     $sql .= "DROP TABLE IF EXISTS `img`;";
+    $sql .= "DROP TABLE IF EXISTS `pics`;";
     $dbh->exec($sql);
     $sql = "use camagru;";
     $sql .= "CREATE TABLE `user` (`ID` int(11) NOT NULL,`LOGIN` varchar(50) DEFAULT NULL,`PASSWORD` varchar(255) DEFAULT NULL,`email` varchar(255) NOT NULL,`validation` int(11) NOT NULL DEFAULT '0', `clef` varchar(255) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
@@ -39,6 +40,15 @@ try {
     $dbh->exec($sql);
     $sql = "use camagru;";
     $sql .= "ALTER TABLE `img` MODIFY `IDimg` int(11) NOT NULL AUTO_INCREMENT;";
+    $dbh->exec($sql);
+    $sql = "use camagru;";
+    $sql .= "CREATE TABLE `pics` (`IDpic` int(11) NOT NULL,`IDusr` int(11) NOT NULL, `PRD_pic` varchar(200) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+    $dbh->exec($sql);
+    $sql = "use camagru;";
+    $sql .= "ALTER TABLE `pics` ADD PRIMARY KEY(`IDpic`);";
+    $dbh->exec($sql);
+    $sql = "use camagru;";
+    $sql .= "ALTER TABLE `pics` MODIFY `IDpic` int(11) NOT NULL AUTO_INCREMENT;";
     $dbh->exec($sql);
     $sql = "use camagru;";
     $sql .= "INSERT INTO `img` (`PRD_Img`) VALUES ('Ressources/feela.png');";

@@ -1,6 +1,6 @@
 <?php
-require_once('./func/connectDb.php');
-if ($_SESSION['login'] == "")
+    require_once('./func/connectDb.php');
+    if ($_SESSION['login'] == "")
     {
         $return = '<p>Vous ne pouvez pas accedez au site sans vous connecter ! Cliquez <a href="./index.php">ici</a>';
         echo $return;
@@ -15,7 +15,12 @@ if ($_SESSION['login'] == "")
         </head>
         <body background="Ressources/bgGrey.png">
             <?php include("header.html") ?>
-            <p> HELLO CECI EST LA GALLERIE</p>
+            <div class="ImgPrincipale">
+                AU MILIEU AVEC DE LA PLACE POUR COMMENTER ET METTRE UN PLUS IL FAUT QUE LA SELECTION UPDATE $_SESSION ID_PIC
+            </div>
+            <div class="gall">
+                 <?php include('./func/DBgallery.php') ?>
+            </div>
             <?php include("footer.html") ?>
     </body>
 </html>

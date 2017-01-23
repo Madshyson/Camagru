@@ -19,8 +19,15 @@
                     <tr style="border:3px solid black;">
                         <th>
                             <div class="videocanvas">
-                                <video id="video"></video><br/>
+                                <video style="position: relative;" id="video"></video> 
+                                <img alt="" id='filter' style="position : absolute; left: -10px; top: 200px; width: 760px; height: 500px;" src="Ressources/feela.png">
                                 <button class="cam-button" id="startbutton">Cam<br/>Yourself</button>
+                                <form action="./func/DBImportimg.php">
+                                    <input id="file" type="file" name="img[]"/>
+                                    <br/>
+                                    <input type="button" name="upload" value="Upload Img">
+                                </form>
+                                <br/>
                             </div>
                         </th>
                         <th>
@@ -31,11 +38,12 @@
                         <th>
                             <div class="minigallerycanvas">
                                 <canvas id="canvas"></canvas>
+                                <photo></photo>
                             </div>
                         </th>
                     </tr>
                 </table>
-                 <script type="text/javascript" src="js/camscript.js"></script>
+                <script type="text/javascript" src="js/camscript.js"></script>
                 <?php include("footer.html") ?>
         </body>
     </html>

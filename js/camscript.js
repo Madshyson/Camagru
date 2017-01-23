@@ -37,7 +37,6 @@
                         canvas.height = 480;
                         canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
                         var data = canvas.toDataURL('image/png');
-                        //inserer ici la fonction permetant d'enregistrer les images sur la database
                         photo.setAttribute('src', data);
                     }
                     startbutton.addEventListener('click', function(ev){

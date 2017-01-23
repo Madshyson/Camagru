@@ -25,6 +25,9 @@
                     <input id="password" type="password" name="password" size="28"/></br></br>
                     <input type="submit" name="submit" value="OK" class="button">
                 </form>
+                <form action="./func/DBreinitialisermail.php" method="post">
+                     <input type="submit" name="submit" value="Forgot Password?" class="button">
+                </form>
                 <?php
                 if ($_SESSION['changeMsg']) {
                     echo "<span class='errorMsg'>" . $_SESSION['changeMsg'] . "</span><br>";

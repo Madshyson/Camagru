@@ -31,22 +31,18 @@ body {
 
 .videocanvas
 {
+	margin: 0px;
 	width:700;
 	border:2px solid black;
 }
 
 .minigallerycanvas
 {
+	margin: 0px;
 	width:700;
 	border:2px solid black;
 }
 
-.head {
-    background-color: lightgray;
-    height: 10vh;
-    margin: 0px;
-    padding: 0px;
-}
 .button-menu{
     display:inline-table;
     position: relative;
