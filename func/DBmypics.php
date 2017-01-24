@@ -2,7 +2,7 @@
 	try 
     { 
         $db->beginTransaction();
-        $req = $db->prepare("SELECT * FROM `pics` WHERE IDusr = ?;");
+        $req = $db->prepare("SELECT * FROM `pics` WHERE IDusr = ? ORDER BY IDpic DESC;");
         $req->execute(array($_SESSION['id_usr']));
         $req->execute();
         while ($dataImg = $req->fetch())

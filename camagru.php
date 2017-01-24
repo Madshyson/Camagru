@@ -18,7 +18,7 @@
                 <table style="width:90%; margin:2%">
                     <tr style="border:3px solid black;">
                         <th>
-                            <div class="videocanvas">
+                            <div class="videocanvas" id="pic">
                                 <video style="position: relative;" id="video"></video> 
                                 <img alt="" id='filter' style="position : absolute; left: -10px; top: 200px; width: 760px; height: 500px;" src="Ressources/feela.png">
                                 <button class="cam-button" id="startbutton">Cam<br/>Yourself</button>

@@ -9,7 +9,7 @@
 	<body background="Ressources/bgGrey.png">
 		<div class="login_input">
 			<form action="func/DBsignup.php" method="post">
-				<label for="pseudo">Pseudo  </label></br>
+				<label for="pseudo">Login  </label></br>
 				<input id="pseudo" type="text" name="pseudo" size="28"/></br></br>
 				<label for="pseudo">Mail </label></br>
 				<input id="mail" type="text" name="mail" size="28"/></br></br>

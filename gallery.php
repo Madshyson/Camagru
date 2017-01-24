@@ -15,12 +15,82 @@
         </head>
         <body background="Ressources/bgGrey.png">
             <?php include("header.html") ?>
-            <div class="ImgPrincipale">
-                AU MILIEU AVEC DE LA PLACE POUR COMMENTER ET METTRE UN PLUS IL FAUT QUE LA SELECTION UPDATE $_SESSION ID_PIC
-            </div>
-            <div class="gall">
-                 <?php include('./func/DBgallery.php') ?>
-            </div>
+            <table class="tabgallery">
+                 <tr>
+                    <td colspan="4">
+                           <img id="imgGallery" src="Ressources/feela.png" style="border: 1px solid white;">
+                    </td>
+                </tr>
+<?php
+                try
+                {
+                    $db->beginTransaction();
+                    $req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ?;");
+                    $req->execute(array($_SESSION['id_pic']));
+                    $data = $req->fetch();
+                     ?> <tr><td> <?php echo (count($data) - 1); 
+                    $db->commit();
+                }
+                catch (PDOException $e) 
+                {
+                    $db->rollBack();
+                    echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
+                }
+                try 
+                {
+                    $db->beginTransaction();
+                    $req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ? AND IDuser = ?;");
+                    $req->execute(array($_POST['login'], $mdp));
+                    $data = $req->fetch();
+                    $db->commit();
+                }   catch(PDOException $e)
+                {
+                    $db->rollBack();
+                    echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
+                } 
+                if(!$data)
+                { ?>
+                    </td><td><img src="./Ressources/greyT.png" onclick="document.location.href='./func/DBaddcomment.php'" width="40px" height="40px"></td></tr> 
+                <?php }
+                else { ?>
+                    </td><td><img src="./Ressources/blueT.png" width="40px" height="40px"></td></tr> 
+                <?php } ?>
+                <tr>
+                    <td colspan="4">
+                        <form action="func/DBaddcomment.php" method="post">
+                            <textarea name="comment" cols="40" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr><td colspan="4"> <?php $_SESSION['submitMsg'] ?></td></tr>
+                    <td colspan="4">
+                            <input type="submit" name="submit" value="Comment" class="button">
+                        </form>
+                    </td>
+                </tr>
+<?php
+                try 
+                {
+                    $db->beginTransaction();
+                    $req = $db->prepare("SELECT `com` FROM `comments` WHERE IDpic = ?;");
+                    $req->execute(array($_SESSION['id_pic']));
+                    $data = $req->fetch();
+                    $db->commit();
+                    while ($data = $req->fetch())
+                    { ?>
+                        <div style="width: 25%; margin-left: 35%;"> <?php echo $data['com']; ?> </div>
+                        <hr align="center" width="80%">
+                    <?php }
+                    }
+                    catch (PDOException $e) 
+                    {
+                        $db->rollBack();
+                        echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
+                    } ?>
+                <tr><td><br><br></td></tr>
+                <tr>
+                    <?php include('./func/DBgallery.php') ?>
+                 </tr>
+            </table>
             <?php include("footer.html") ?>
     </body>
 </html>

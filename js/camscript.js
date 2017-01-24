@@ -36,8 +36,31 @@
                         canvas.width = 640;
                         canvas.height = 480;
                         canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+                        var filter = document.getElementById('filter').src;
                         var data = canvas.toDataURL('image/png');
-                        photo.setAttribute('src', data);
+                        var f = document.createElement("form");
+                        f.setAttribute('method',"post");
+                        f.setAttribute('action',"./func/DBsetimg.php");
+                        var nImgIn = document.createElement("input");
+                        nImgIn.setAttribute('type',"text");
+                        nImgIn.setAttribute('name', 'data');
+                        var nImg = document.createElement("input");
+                        nImg.setAttribute('type',"text");
+                        nImg.setAttribute('name', 'data');
+                        nImg.setAttribute('value', data);
+                        var nFilterIn = document.createElement("input");
+                        nFilterIn.setAttribute('type',"text");
+                        nFilterIn.setAttribute('name', 'filter');
+                        var nFilter = document.createElement("input");
+                        nFilter.setAttribute('type',"text");
+                        nFilter.setAttribute('name', 'filter');
+                        nFilter.setAttribute('value', filter);
+                        f.appendChild(nImgIn);
+                        f.appendChild(nImg);
+                        f.appendChild(nFilterIn);
+                        f.appendChild(nFilter);
+                        document.body.appendChild(f);
+                        f.submit();
                     }
                     startbutton.addEventListener('click', function(ev){
                         takepicture();
