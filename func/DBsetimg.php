@@ -1,7 +1,13 @@
 <?php
 	require_once('./connectDb.php');
-	$array = array_values($_POST);
-	$filt = imagecreatefrompng($array[1]);
+	$filt = $_POST["filter"];
+	$img = $_POST['data'];
+	//$img = str_replace('data:image/png;base64,', '', $img);
+	//$img = str_replace(' ', '+', $img);
+	//$img = base64_decode($img);
+	var_dump($img === base64_encode(base64_decode($img)));
+	$filt = imagecreatefrompng($filt);
+	$dest = imagecreatefrompng($img);
 	try
 	{
 		$db->beginTransaction();
@@ -19,14 +25,8 @@
 		$req = $db->prepare("SELECT IDpic FROM `pics` ORDER BY IDpic DESC LIMIT 1;");
 		$req->execute(array());
 		$lastpic = $req->fetch();
-		$upload_dir = "../img/";
+		$file  = "../img/";
 		$filename = "img".$_SESSION['id_usr']."_".$lastpic['IDpic'].".png";
-		$img = $array[0];
-		$img = str_replace('data:image/png;base64,', '', $img);
-		$img = str_replace(' ', '+', $img);
-		$data = base64_decode($img);
-		$file = $upload_dir;
-		$success1 = file_put_contents($file, $data);
 		$db->commit();
 	}
 	catch(PDOException $e) 
@@ -38,7 +38,7 @@
 	{
 		$db->beginTransaction();
 		$req = $db->prepare("UPDATE `pics` SET PRD_pic = ? WHERE IDpic = ?;");
-		$req->execute(array($filename));
+		$req->execute(array($filename, $lastpic['IDpic']));
 		$db->commit();
 	}
 	catch(PDOException $e) 
@@ -46,9 +46,10 @@
 		$db->rollBack();
 		echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
 	}
-	$dest = imagecreatefrompng($upload_dir.$filename);
-	$data = imagecopymerge($dest, $filt, 10, 9, 0, 0, 181, 640, 480);
-	$success2 = file_put_contents($file, $data);
+	$data = imagecopy($dest, $filt, 0, 0, 0, 0, 640, 480);
+	imagepng($data, $file.$filename);
+	$_SESSION['img_prd'] = "./img/".$filename;
+	$_SESSION['id_pic'] = $lastpic['IDpic'];
 	header ("Location: ../camagru.php");
 	die();
 ?>

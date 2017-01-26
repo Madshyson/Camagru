@@ -18,22 +18,22 @@ if ($_SESSION['login'] == "")
             <table class="tabgallery">
                 <tr>
                     <td colspan="4">
-                           <img id="imgGallery" src="Ressources/feela.png" style="border: 1px solid white;">
+                           <img id="imgGallery" src="<?php echo $_SESSION['img_prd']; ?>" style="border: 1px solid white;">
                     </td>
                 </tr>
 <?php
                 if ($_SESSION['id_pic'])
                 { ?>
-                    <tr><td colspan="4"><form action="./func/DBdeletepic.php" method="post"><input type="submit" name="submit" value="delete" class="button"></form></td></tr>
+                    <tr><td colspan="4"><form action="./func/DBdeletepic.php" method="post"><input type="submit" name="submit" value="delete"></form></td></tr>
 <?php               
                 }
                 try
                 {
                     $db->beginTransaction();
-                    $req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ?;");
+                    $req = $db->prepare("SELECT IDpic FROM `likes` WHERE IDpic = ?;");
                     $req->execute(array($_SESSION['id_pic']));
                     $data = $req->fetch();
-                     ?> <tr><td> <?php echo (count($data) - 1); ?> </td></tr> <?php
+                     ?> <tr><td> <?php echo (count($data) - 1); ?> <img style="width: 40px;" src="Ressources/blueT.png"></td></tr> <?php
                     $db->commit();
                 }
                 catch (PDOException $e) 
@@ -60,9 +60,9 @@ if ($_SESSION['login'] == "")
                         echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
                     } ?>
                 <tr><td><br><br></td></tr>
-                <tr>
-                    <?php include('./func/DBgallery.php') ?>
-                 </tr>
+                <table>
+                    <?php include('./func/DBmypics.php') ?>
+                 </table>
             </table>
             <?php include("footer.html") ?>
     </body>

@@ -32,14 +32,14 @@ body {
 .videocanvas
 {
 	margin: 0px;
-	width:700;
+	width: 640px;
 	border:2px solid black;
 }
 
 .minigallerycanvas
 {
 	margin: 0px;
-	width:700;
+	width: 640px;
 	border:2px solid black;
 }
 
@@ -100,10 +100,10 @@ body {
 
 .tabgallery
 {
-	border: 1px solid white; 
-	margin: 10%; 
+	margin: 25%; 
 	margin-top: 50px;
 	padding: 0%;
+	border-collapse: collapse;
 }
 
 .animate

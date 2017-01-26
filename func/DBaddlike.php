@@ -4,7 +4,7 @@
 	{
 		$db->beginTransaction();
 		$req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ? AND IDuser = ?;");
-		$req->execute(array($_POST['login'], $mdp));
+		$req->execute(array($_SESSION['id_pic'], $_SESSION['id_usr']));
 		$data = $req->fetch();
 		$db->commit();
 	}	catch(PDOException $e) 

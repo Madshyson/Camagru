@@ -7,7 +7,7 @@
         while ($dataImg = $req->fetch())
         { 
             $prd = $dataImg['PRD_Img']; ?>
-            <td><img style="border: solid black; width: 400px; height: 270px;" onclick="document.getElementById('imgGallery').src='<?php echo $prd; ?>';" height="150px;" src="<?php echo $prd ?>"></td>
+            <tr style="margin: 20px;"><img style="border: solid black; width: 400px; height: 270px;" onclick="document.getElementById('imgGallery').src='<?php echo $prd; ?>';" height="150px;" src="<?php echo $prd ?>"></tr>
             <?php
         }
     }

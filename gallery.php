@@ -16,16 +16,16 @@
         <body background="Ressources/bgGrey.png">
             <?php include("header.html") ?>
             <table class="tabgallery">
-                 <tr>
+                <tr>
                     <td colspan="4">
-                           <img id="imgGallery" src="Ressources/feela.png" style="border: 1px solid white;">
+                           <img id="imgGallery" src="<?php echo $_SESSION['img_prd']; ?>" style="border: 1px solid white;">
                     </td>
                 </tr>
 <?php
                 try
                 {
                     $db->beginTransaction();
-                    $req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ?;");
+                    $req = $db->prepare("SELECT IDpic FROM `likes` WHERE IDpic = ?;");
                     $req->execute(array($_SESSION['id_pic']));
                     $data = $req->fetch();
                      ?> <tr><td> <?php echo (count($data) - 1); 
@@ -39,7 +39,7 @@
                 try 
                 {
                     $db->beginTransaction();
-                    $req = $db->prepare("SELECT * FROM `likes` WHERE IDpic = ? AND IDuser = ?;");
+                    $req = $db->prepare("SELECT IDuser FROM `likes` WHERE IDpic = ? AND IDuser = ?;");
                     $req->execute(array($_POST['login'], $mdp));
                     $data = $req->fetch();
                     $db->commit();
@@ -48,9 +48,9 @@
                     $db->rollBack();
                     echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
                 } 
-                if(!$data)
+                if($data['IDuser'] == $_SESSION['id_usr'])
                 { ?>
-                    </td><td><img src="./Ressources/greyT.png" onclick="document.location.href='./func/DBaddcomment.php'" width="40px" height="40px"></td></tr> 
+                    </td><td><img src="./Ressources/greyT.png" onclick="document.location.href='./func/DBaddlike.php'" width="40px" height="40px"></td></tr> 
                 <?php }
                 else { ?>
                     </td><td><img src="./Ressources/blueT.png" width="40px" height="40px"></td></tr> 
@@ -87,9 +87,9 @@
                         echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
                     } ?>
                 <tr><td><br><br></td></tr>
-                <tr>
+               <table style="margin-left: 20%; border-spacing: 5px;">
                     <?php include('./func/DBgallery.php') ?>
-                 </tr>
+                </table>
             </table>
             <?php include("footer.html") ?>
     </body>

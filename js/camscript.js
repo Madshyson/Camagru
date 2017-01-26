@@ -1,12 +1,12 @@
-                (function() {
-                    var streaming	 = false,
+                 (function() {
+                    var streaming    = false,
                     video        = document.querySelector('#video'),
                     cover        = document.querySelector('#cover'),
                     canvas       = document.querySelector('#canvas'),
                     photo        = document.querySelector('#photo'),
                     startbutton  = document.querySelector('#startbutton'),
-                    width = 700,
-                    height = 0;
+                    width = 640,
+                    height = 480;
                     navigator.getMedia = (navigator.getUserMedia ||
                                         navigator.webkitGetUserMedia ||
                                         navigator.mozGetUserMedia ||
@@ -33,31 +33,21 @@
                         }
                     }, false);
                     function takepicture() {
-                        canvas.width = 640;
-                        canvas.height = 480;
-                        canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+                        canvas.width = width;
+                        canvas.height = height;
+                        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
                         var filter = document.getElementById('filter').src;
                         var data = canvas.toDataURL('image/png');
                         var f = document.createElement("form");
-                        f.setAttribute('method',"post");
-                        f.setAttribute('action',"./func/DBsetimg.php");
-                        var nImgIn = document.createElement("input");
-                        nImgIn.setAttribute('type',"text");
-                        nImgIn.setAttribute('name', 'data');
+                        f.method = 'post';
+                        f.action = './func/DBsetimg.php';
                         var nImg = document.createElement("input");
-                        nImg.setAttribute('type',"text");
-                        nImg.setAttribute('name', 'data');
-                        nImg.setAttribute('value', data);
-                        var nFilterIn = document.createElement("input");
-                        nFilterIn.setAttribute('type',"text");
-                        nFilterIn.setAttribute('name', 'filter');
+                        nImg.name = 'data';
+                        nImg.value = data;
                         var nFilter = document.createElement("input");
-                        nFilter.setAttribute('type',"text");
-                        nFilter.setAttribute('name', 'filter');
-                        nFilter.setAttribute('value', filter);
-                        f.appendChild(nImgIn);
+                        nFilter.name = 'filter';
+                        nFilter.value = filter; 
                         f.appendChild(nImg);
-                        f.appendChild(nFilterIn);
                         f.appendChild(nFilter);
                         document.body.appendChild(f);
                         f.submit();
