@@ -4,8 +4,8 @@ if ($_POST["submit"] == "OK")
 {
 	$id = $_SESSION['id_usr'];
 	$mail = $_POST["mail"];
-	$log = $_POST["pseudo"];
-	$mdp = hash('whirlpool', $_POST["password"]);
+	$log = htmlspecialchars($_POST["pseudo"]);
+	$mdp = $_POST["password"];
 	if (filter_var($mail, FILTER_VALIDATE_EMAIL)) 
 	{
 		try
@@ -36,6 +36,7 @@ if ($_POST["submit"] == "OK")
 	}
 	if ($mdp && strlen($mdp) >= 3) 
 	{
+		$mdp = hash("whirlpool", $mdp);
 		try
 		{
 			$db->beginTransaction();

@@ -2,12 +2,10 @@
 	require_once('./connectDb.php');
 	$filt = $_POST["filter"];
 	$img = $_POST['data'];
-	//$img = str_replace('data:image/png;base64,', '', $img);
-	//$img = str_replace(' ', '+', $img);
-	//$img = base64_decode($img);
-	var_dump($img === base64_encode(base64_decode($img)));
+	$img = preg_replace("#^data:image/\w+;base64,#i", '', $img);
+	$img = base64_decode($img);
 	$filt = imagecreatefrompng($filt);
-	$dest = imagecreatefrompng($img);
+	$dest = imagecreatefromstring($img);
 	try
 	{
 		$db->beginTransaction();
@@ -46,8 +44,8 @@
 		$db->rollBack();
 		echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
 	}
-	$data = imagecopy($dest, $filt, 0, 0, 0, 0, 640, 480);
-	imagepng($data, $file.$filename);
+	imagecopy($dest, $filt, 0, 0, 0, 0, 640, 480);
+	imagepng($dest, $file.$filename);
 	$_SESSION['img_prd'] = "./img/".$filename;
 	$_SESSION['id_pic'] = $lastpic['IDpic'];
 	header ("Location: ../camagru.php");

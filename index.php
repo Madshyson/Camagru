@@ -22,6 +22,13 @@
 			<?php
 				if ($_SESSION['sessionMsg']) {
 					echo "<span class='errorMsg'>" . $_SESSION['sessionMsg'] . "</span><br><br>";
+					?>
+					<form action="./func/DBreinitialisermail.php" method="post">
+						<label for="login">Login : </label></br>
+						<input id="login" type="text" name="login" size="28"/></br></br>
+                    	<input type="submit" name="submit" value="Forgot Password?" class="button">
+                	</form>
+                	<?php
 				}
 			?>
 		</div>

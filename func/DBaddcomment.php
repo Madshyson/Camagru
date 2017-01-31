@@ -1,12 +1,13 @@
 <?php
 	require_once('./connectDb.php');
-	if ($_POST['comment'] && $_POST['submit'] == 'OK') 
+	$idpic = $_GET['idpic'];
+	if ($_POST['comment'] && $_POST['submit'] == 'Comment') 
 	{	
 		try
 		{
 			$db->beginTransaction();
-			$req = $db->prepare("INSERT INTO `comments` (`IDpic`, `IDuser`, `text`) VALUES (?, ?, ?);");
-			$req->execute(array($_SESSION['id_pic'], $_SESSION['id_usr'], $_POST['comment']));
+			$req = $db->prepare("INSERT INTO `comments` (`IDpic`, `IDuser`, `com`) VALUES (?, ?, ?);");
+			$req->execute(array($idpic, $_SESSION['id_usr'], htmlspecialchars($_POST['comment'])));
 			$db->commit();
 		} catch(PDOException $e) 
 		{
@@ -17,7 +18,7 @@
 		{
 			$db->beginTransaction();
 			$req = $db->prepare("SELECT IDusr FROM `pics` WHERE IDpic = ?;");
-			$req->execute(array($_SESSION['id_pic']));
+			$req->execute(array($idpic));
 			$usrpic = $req->fetch();
 			$db->commit();
 		} catch(PDOException $e) 
@@ -37,23 +38,22 @@
 			$db->rollBack();
 			echo 'Connexion échouée : ' . $e->getMessage() . '<br/>';
 		}
-		$subject = "On a commente un de vos photo !";
+		$subject = "On a commente une de vos photos !";
 		$header = "From: infocamagru@camagru.com"; 
 		$message = 'Bienvenue sur Camagru !,
  
-		On a commente votre image ! allez verifier !
+On a commente votre image ! allez verifier !
  
-		---------------
+---------------
 		Ceci est un mail automatique, Merci de ne pas y répondre.';
-		mail($usrmail['IDusr'], $subject, $message, $header);
+		mail($usrmail['email'], $subject, $message, $header);
 		$_SESSION['submitMsg'] = "";
-		header ("Location: ../gallery.php");
+		header ("Location: ../pic.php?idpic=".$idpic);
 		die();
 	}
 	else
 	{
-		$_SESSION['submitMsg'] = "veuillez rentrer du texte";
-		header ("Location: ../gallery.php");
+		header ("Location: ../pic.php?idpic=".$idpic);
 		die();
 	}
 ?>

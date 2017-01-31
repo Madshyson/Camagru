@@ -32,15 +32,13 @@ body {
 .videocanvas
 {
 	margin: 0px;
-	width: 640px;
+	width: 700px;
 	border:2px solid black;
 }
 
 .minigallerycanvas
 {
 	margin: 0px;
-	width: 640px;
-	border:2px solid black;
 }
 
 .button-menu{
@@ -100,7 +98,8 @@ body {
 
 .tabgallery
 {
-	margin: 25%; 
+	margin: 15%; 
+	margin-bottom: 0px;
 	margin-top: 50px;
 	padding: 0%;
 	border-collapse: collapse;
@@ -117,6 +116,17 @@ body {
 	transform: translate(0px,5px);
     -webkit-transform: translate(0px,5px);
 	border-bottom: 1px solid;
+}
+
+#filter
+{
+	position : relative;
+	top: -480px;
+	left: -320px;
+	margin-bottom: -480px;
+	margin-right: -320px;
+	width: 320px;
+	height: 240px;	
 }
 
 td

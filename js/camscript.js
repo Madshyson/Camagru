@@ -5,8 +5,8 @@
                     canvas       = document.querySelector('#canvas'),
                     photo        = document.querySelector('#photo'),
                     startbutton  = document.querySelector('#startbutton'),
-                    width = 640,
-                    height = 480;
+                    width = 320,
+                    height = 0;
                     navigator.getMedia = (navigator.getUserMedia ||
                                         navigator.webkitGetUserMedia ||
                                         navigator.mozGetUserMedia ||
@@ -17,21 +17,24 @@
                         audio: false
                     },
                     function(stream) {
-                        var vendorURL = window.webkitURL || window.URL;
+                        var vendorURL = window.URL;
                         video.src = vendorURL.createObjectURL(stream);
                         video.play();
                     }, function(err) { console.log("An error occured! " + err);}
                     );
-                    video.addEventListener('canplay', function(ev){
-                        if (!streaming) {
-                            height = video.videoHeight / (video.videoWidth/width);
-                            video.setAttribute('width', width);
-                            video.setAttribute('height', height);
-                            canvas.setAttribute('width', width);
-                            canvas.setAttribute('height', height);
-                            streaming = true;
-                        }
-                    }, false);
+                    if(video && canvas)
+                    {
+                        video.addEventListener('canplay', function(ev){
+                            if (!streaming) {
+                                height = video.videoHeight / (video.videoWidth / width);
+                                video.width = width;
+                                video.height = height;
+                                canvas.width = width;
+                                canvas.height = height;
+                                streaming = true;
+                            }
+                        }, false);
+                    }
                     function takepicture() {
                         canvas.width = width;
                         canvas.height = height;
@@ -52,9 +55,9 @@
                         document.body.appendChild(f);
                         f.submit();
                     }
-                    startbutton.addEventListener('click', function(ev){
-                        takepicture();
-                        ev.preventDefault();
-                    }, false);
-                }
+                        startbutton.addEventListener('click', function(ev){
+                            takepicture();
+                            ev.preventDefault();
+                        }, false);
+                    }
             )();

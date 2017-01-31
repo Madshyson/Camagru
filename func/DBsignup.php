@@ -41,7 +41,7 @@
 			{
 				$db->beginTransaction();
 				$req = $db->prepare("INSERT INTO `user` (`LOGIN`, `PASSWORD`, `email`, `validation`, `clef`) VALUES (?, ?, ?, ?, ?);");
-		 		$req->execute(array($pseudo, $mdp, $mail, 0, $cle));
+		 		$req->execute(array(htmlspecialchars($pseudo), $mdp, $mail, 0, $cle));
 		 		$db->commit();
 			} catch(PDOException $e) 
 			{
@@ -56,7 +56,7 @@
 			Pour activer votre compte, veuillez cliquer sur le lien ci dessous
 			ou copier/coller dans votre navigateur internet.
  
-			http://localhost:8080/Camagru/func/DBvalidation.php?log='.urlencode($pseudo).'&cle='.urlencode($cle).'
+			http://localhost:8080/Camagru/func/DBvalidation.php?log='.urlencode(htmlspecialchars($pseudo)).'&cle='.urlencode($cle).'
  
  
 			---------------

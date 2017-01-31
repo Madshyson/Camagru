@@ -6,9 +6,9 @@
 		try {
 			$db->beginTransaction();
 			$req = $db->prepare("SELECT ID, LOGIN, PASSWORD, validation FROM `user` WHERE LOGIN = ? AND PASSWORD = ?;");
-			$req->execute(array($_POST['login'], $mdp));
+			$req->execute(array(htmlspecialchars($_POST['login']), $mdp));
 			$data = $req->fetch();
-			if ($data['LOGIN'] == $_POST["login"] && $data['PASSWORD'] == $mdp) 
+			if ($data['LOGIN'] == htmlspecialchars($_POST["login"]) && $data['PASSWORD'] == $mdp) 
 			{
             	if ($data['validation']) {
                 	$_SESSION['login'] = $data['LOGIN'];
